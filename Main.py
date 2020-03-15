@@ -1,4 +1,15 @@
 import pygame, sys
+import random
+
+
+class Runner():
+    def __init__(self, x=0, y=0):
+        self.custome = pygame.image.load("images/runner.png")
+        self.position = (x, y)
+        self.name = "Pajaro"
+        
+    def avanzar(self):
+        self.position[0] += random.randint(1, 6)
 
 class Game():
     runners = []
@@ -11,6 +22,11 @@ class Game():
         self.__background = pygame.image.load("images/bg.jpg")
         pygame.display.set_caption("Carrera de bichos")
         
+        firstRunner = Runner(self.__startLine,0)
+        firstRunner.name = "Speedy"
+        self.runners.append(firstRunner)
+
+        
     def competir(self):
         gameOver = False
         while not gameOver:
@@ -19,7 +35,8 @@ class Game():
                     gameOver = True
                         
             self.__screen.blit(self.__background, (0,0))
-                
+            self.__screen.blit(self.runners[0].custome, self.runners[0].position) #Como si fuesen rutas 
+             
             pygame.display.flip()
             
         pygame.quit()
