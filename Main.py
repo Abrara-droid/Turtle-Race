@@ -5,7 +5,7 @@ import random
 class Runner():
     def __init__(self, x=0, y=0):
         self.custome = pygame.image.load("images/runner.png")
-        self.position = (x, y)
+        self.position = [x, y]
         self.name = "Pajaro"
         
     def avanzar(self):
@@ -13,7 +13,7 @@ class Runner():
 
 class Game():
     runners = []
-    __startLine = 20
+    __startLine = 5
     __finishLine = 620
     
     def __init__(self):
@@ -33,7 +33,13 @@ class Game():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     gameOver = True
-                        
+            
+            self.runners[0].avanzar()
+            
+            if self.runners[0].position[0] >= self.__finishLine:
+                print("{} ha ganado".format(self.runners[0].name))
+                gameOver = True
+            
             self.__screen.blit(self.__background, (0,0))
             self.__screen.blit(self.runners[0].custome, self.runners[0].position) #Como si fuesen rutas 
              
